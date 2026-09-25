@@ -208,10 +208,10 @@ class syntax_plugin_svgembed extends DokuWiki_Syntax_Plugin
 
             // If both dimensions are not specified by the page then find them in the SVG file (if possible), and if not just pop out a default
             if (!$hasdimensions) {
-                $svg_file = sprintf('%s%s', $conf['mediadir'], str_replace(':', '/', $src));
+                $svg_file = sprintf('%s/%s', $conf['mediadir'], str_replace(':', '/', $src));
 
                 if (file_exists($svg_file) && ($svg_fp = fopen($svg_file, 'r'))) {
-                    $svg_xml = simplexml_load_file($svg_file, SimpleXMLElement::class, XML_PARSE_HUGE);
+                    $svg_xml = simplexml_load_file($svg_file, SimpleXMLElement::class, LIBXML_PARSEHUGE);
 
                     // Find the amount to adjust the pixels for layout if a unit is involved; use the
                     //   largest adjustment if they are mixed
